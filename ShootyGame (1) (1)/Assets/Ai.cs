@@ -4,22 +4,29 @@ using UnityEngine;
 
 public class Ai : MonoBehaviour
 {
+
+    
+    [Header("Navigation")]
     Vector2 playerLoc;
     [SerializeField] GameObject player;
     Rigidbody2D rb;
-    [SerializeField] Transform bulletSpawn;
     [SerializeField] float runSpeed;
     [SerializeField] float stopDist;
+    [SerializeField] Transform goal;
+
+    [Header("Misc")]
+    [SerializeField] float health;
+
+    [Header("Weapon")]
     [SerializeField] [Range(0, 10)] float aimAccuracy;
     [SerializeField] float fireRate;
     [SerializeField] GameObject bulletTrail;
     [SerializeField] float fireDist;
     [SerializeField] float weaponImpactForce;
     [SerializeField] float weaponDamage;
-    [SerializeField] float health;
+    [SerializeField] Transform bulletSpawn;
     float startHealth;
     Vector3 startScale;
-    [SerializeField] GameObject testObj;
     float nextFire;
 
     // Start is called before the first frame update
@@ -51,23 +58,19 @@ public class Ai : MonoBehaviour
         
         if (transform.position.x < GetPlayerLoc().x)
         {
-            transform.localScale = new Vector3(startScale.x, transform.localScale.y, transform.localScale.z);
-            //bulletSpawn.eulerAngles = Vector3.zero;
-            //bulletSpawn.localScale = Vector3.one;
+            transform.localScale = new Vector3(startScale.x, transform.localScale.y, transform.localScale.z);//flip sprite to look at player
         }
         else
         {
-            transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z);
-            //bulletSpawn.eulerAngles = Vector3.zero;
-            //bulletSpawn.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z); //flip sprite to look at player
         }
         if (transform.position.x > GetPlayerLoc().x - stopDist)
         {
-            rb.AddRelativeForce(-transform.right * runSpeed * Time.deltaTime * 100);
+            rb.AddRelativeForce(-transform.right * runSpeed * Time.deltaTime * 100);//move left
         }
         if (transform.position.x < GetPlayerLoc().x + stopDist)
         {
-            rb.AddRelativeForce(transform.right * runSpeed * Time.deltaTime * 100);
+            rb.AddRelativeForce(transform.right * runSpeed * Time.deltaTime * 100); //move right
         }
     }
     void Aim()

@@ -141,10 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9047ccc12af7cf4b8fb6e8fe0279d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  bulletSpawn: {fileID: 8000248284964099538}
-  runSpeed: 5
-  stopDist: 5
   aimAccuracy: 0
   fireRate: 1
   bulletTrail: {fileID: 7501294854277888386, guid: 1e98fe113fb5594bca146ba378081006,
@@ -152,8 +148,12 @@ MonoBehaviour:
   fireDist: 20
   weaponImpactForce: 150
   weaponDamage: 1
+  bulletSpawn: {fileID: 8000248284964099538}
+  player: {fileID: 0}
+  runSpeed: 5
+  stopDist: 5
+  goal: {fileID: 0}
   health: 5
-  testObj: {fileID: 1980773115288723975, guid: a3505ee4e1f3dc0bb965eddfa7ebbbed, type: 3}
 --- !u!1 &8000248286577762984
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +199,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
