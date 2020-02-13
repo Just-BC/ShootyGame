@@ -10,13 +10,29 @@ public class Ai : MonoBehaviour
     Vector2 playerLoc;
     [SerializeField] GameObject player;
     Rigidbody2D rb;
-    [SerializeField] float runSpeed;
+    [SerializeField] float speed;
     [SerializeField] float stopDist;
-    [SerializeField] Transform goal;
+    Transform goal;
+    public List<Transform> visibleTargets = new List<Transform>();
+    [SerializeField] List<Transform> Waypoints;
+    [SerializeField] float wayPointTime;
+    public float viewDist;
+    public float viewAngle;
+    float maxAngle;
+    float minAngle;
+    [SerializeField] LayerMask obstacleMask;
+    [SerializeField] AnimationCurve curve;
+
+    [Header("Modes/Behavior")]
+    [SerializeField] string mode;
+    [SerializeField] float patrolSpeed;
+    [SerializeField] LayerMask playerMask;
+    [SerializeField] Transform headPos;
+
+
 
     [Header("Misc")]
     [SerializeField] float health;
-
     [Header("Weapon")]
     [SerializeField] [Range(0, 10)] float aimAccuracy;
     [SerializeField] float fireRate;
@@ -25,52 +41,140 @@ public class Ai : MonoBehaviour
     [SerializeField] float weaponImpactForce;
     [SerializeField] float weaponDamage;
     [SerializeField] Transform bulletSpawn;
+
+    int currentGoal = 0;
     float startHealth;
+    float startSpeed;
     Vector3 startScale;
     float nextFire;
+    float distToGoal;
 
-    // Start is called before the first frame update
     void Start()
     {
-        startHealth = health;
-        rb = GetComponent<Rigidbody2D>();
-        startScale = transform.localScale;
+        startHealth = health;//record the starting health
+        startSpeed = speed;//record the starting speed;
+        rb = GetComponent<Rigidbody2D>();//find the rigid body
+        startScale = transform.localScale; //record the starting scale
+        maxAngle = viewAngle;
+        maxAngle = -viewAngle;
+        //Clear all waypoint parents
+        foreach (Transform g in Waypoints)
+        {
+            g.transform.SetParent(null);
+        }
     }
-
-    // Update is called once per frame
     void Update()
     {
-        Navigate();
-        Fire();
-        
+        Logic();
     }
-    private void FixedUpdate()
+
+    ///MODES/BEHAVIOR//////////////////////////////////////
+    void Logic()
     {
-        Aim();
+
+        if (FindTargets())
+        {
+            mode = "fight";
+            Fight();
+        }
+        else if (mode == "patrol")
+        {
+            Patrol();
+        }
+
+    }
+
+    ///NAVIGATION//////////////////////////////////////
+    IEnumerator WayPointTimer()
+    {
+        yield return new WaitForSeconds(wayPointTime);
+        FindWaypoint();
     }
     Vector2 GetPlayerLoc()
     {
         //Instantiate(testObj, player.transform.position, player.transform.rotation);
         return player.transform.position;
     }
-    void Navigate()
+    void Patrol()
     {
+        speed = patrolSpeed;
+        if(goal==null)
+            FindWaypoint();
+        distToGoal = Vector2.Distance(transform.position, goal.transform.position);
         
-        if (transform.position.x < GetPlayerLoc().x)
+        if(goal != null)
         {
-            transform.localScale = new Vector3(startScale.x, transform.localScale.y, transform.localScale.z);//flip sprite to look at player
+            if (transform.position.x < goal.transform.position.x)
+            {
+                transform.localScale = new Vector3(startScale.x, transform.localScale.y, transform.localScale.z);
+            }//flip sprite right to look at the goal
+            else
+            {
+                transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z);
+            }//flip sprite left to look the goal
+
+            if (transform.position.x > goal.transform.position.x - stopDist/10)
+            {
+                rb.AddRelativeForce(-transform.right * speed * curve.Evaluate(1 - distToGoal) * Time.deltaTime * 100);
+            }//move left
+
+            if (transform.position.x < goal.transform.position.x + stopDist/10)
+            {
+                rb.AddRelativeForce(transform.right * speed * curve.Evaluate(1 - distToGoal) * Time.deltaTime * 100);
+            }//move right
+        }
+        print(goal.name);
+    }
+    bool FindTargets()
+    {
+        headPos.LookAt(player.transform.position);
+        if (!Physics2D.Raycast(headPos.position, headPos.forward, Vector2.Distance(headPos.position, player.transform.position), playerMask))// && headPos.eulerAngles.z >= maxAngle && headPos.eulerAngles.z <= minAngle)
+        {
+            goal = player.transform;
+            return true;
         }
         else
         {
-            transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z); //flip sprite to look at player
+            return false;
         }
-        if (transform.position.x > GetPlayerLoc().x - stopDist)
+    }
+    void FindWaypoint()
+    {
+        if (Waypoints.Count == currentGoal)
         {
-            rb.AddRelativeForce(-transform.right * runSpeed * Time.deltaTime * 100);//move left
+            currentGoal = 0;
+            
         }
-        if (transform.position.x < GetPlayerLoc().x + stopDist)
+        goal = Waypoints[currentGoal];
+        StartCoroutine(WayPointTimer());
+        currentGoal++;
+
+    }
+
+
+    ///WEAPON//////////////////////////////////////////
+    void Fight()
+    {
+        speed = startSpeed;
+        Fire();
+        Aim();
+        goal = player.transform;
+        distToGoal = Vector2.Distance(transform.position, goal.transform.position);
+        if (transform.position.x < goal.transform.position.x)
         {
-            rb.AddRelativeForce(transform.right * runSpeed * Time.deltaTime * 100); //move right
+            transform.localScale = new Vector3(startScale.x, transform.localScale.y, transform.localScale.z);//flip sprite to look at the goal
+        }
+        else
+        {
+            transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z); //flip sprite to look the goal
+        }
+        if (transform.position.x > goal.transform.position.x - stopDist)
+        {
+            rb.AddRelativeForce(-transform.right * speed * Time.deltaTime * 100);//move left
+        }
+        if (transform.position.x < goal.transform.position.x + stopDist)
+        {
+            rb.AddRelativeForce(transform.right * speed * Time.deltaTime * 100); //move right
         }
     }
     void Aim()
@@ -118,6 +222,9 @@ public class Ai : MonoBehaviour
             
         }
     }
+
+
+    ///MISC////////////////////////////////////////////
     public void Damage(float damage)
     {
         health -= damage;

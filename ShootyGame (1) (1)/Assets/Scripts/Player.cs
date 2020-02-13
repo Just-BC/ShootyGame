@@ -127,14 +127,6 @@ public class Player : MonoBehaviour
                 //Debug.DrawLine(bulletSpawn.position, bulletSpawn.right.normalized * fireDist, Color.blue,20,false);
                 print("fired but didn't hit nothin");
             }
-            /* PREFAB SHOOTING
-            
-            print("fire!");
-            newBullet = Instantiate(bullet, null);
-            newBullet.transform.position = bulletSpawn.position;
-            newBullet.transform.rotation = bulletSpawn.rotation;
-            newBullet.GetComponent<Rigidbody2D>().AddRelativeForce(newBullet.transform.right*bulletSpeed * Time.deltaTime*100);
-            */
              
         }
 

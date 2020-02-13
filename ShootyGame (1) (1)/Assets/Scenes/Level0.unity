@@ -625,7 +625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &165077688
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -664,7 +664,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -770,7 +770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &181346388
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -809,7 +809,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -915,7 +915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &195068881
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -954,7 +954,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1371,7 +1371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &253435129
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1410,7 +1410,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1650,7 +1650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &277865613
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1689,7 +1689,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1825,7 +1825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &291388899
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1864,7 +1864,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2098,7 +2098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &342206869
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2137,7 +2137,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -2329,10 +2329,30 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 24445268}
+    - target: {fileID: 8000248285516444624, guid: e4eaeea11e6f33e4095252cd85aac081,
+        type: 3}
+      propertyPath: playerMask.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000248285516444624, guid: e4eaeea11e6f33e4095252cd85aac081,
+        type: 3}
+      propertyPath: viewDist
+      value: 2.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000248285516444624, guid: e4eaeea11e6f33e4095252cd85aac081,
+        type: 3}
+      propertyPath: viewAngle
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000248285516444624, guid: e4eaeea11e6f33e4095252cd85aac081,
+        type: 3}
+      propertyPath: headPos
+      value: 
+      objectReference: {fileID: 1484076291}
     - target: {fileID: 8000248285516444625, guid: e4eaeea11e6f33e4095252cd85aac081,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.43
+      value: 52.26
       objectReference: {fileID: 0}
     - target: {fileID: 8000248285516444625, guid: e4eaeea11e6f33e4095252cd85aac081,
         type: 3}
@@ -2850,7 +2870,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &517692853
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2889,7 +2909,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3123,7 +3143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &619359993
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3162,7 +3182,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3268,7 +3288,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &639560266
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3307,7 +3327,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3413,7 +3433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &646986597
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3452,7 +3472,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3558,7 +3578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &697783868
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3597,7 +3617,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -3831,7 +3851,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &745481459
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3870,7 +3890,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4068,7 +4088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &804578872
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4107,7 +4127,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4213,7 +4233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &804946218
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4252,7 +4272,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4358,7 +4378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &816997940
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4397,7 +4417,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4503,7 +4523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &824840654
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4542,7 +4562,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4648,7 +4668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &891852856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4687,7 +4707,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4793,7 +4813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &922741627
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4832,7 +4852,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -4938,7 +4958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &935530339
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4977,7 +4997,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -5083,7 +5103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1011385469
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5122,7 +5142,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -5334,7 +5354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1037977852
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5373,7 +5393,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -5479,7 +5499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1048217729
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5518,7 +5538,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -5624,7 +5644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1087446997
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5663,7 +5683,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -5897,7 +5917,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1140940763
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5936,7 +5956,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -6247,7 +6267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1162912353
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6286,7 +6306,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -6483,7 +6503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1214829715
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6522,7 +6542,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -6628,7 +6648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1321298100
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6667,7 +6687,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -6879,7 +6899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1341438751
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6918,7 +6938,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -7024,7 +7044,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1365880490
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7063,7 +7083,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -7099,8 +7119,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410002196}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.61, y: 0.54, z: 3.6937437}
-  m_LocalScale: {x: 6.746643, y: 1.6082604, z: 1}
+  m_LocalPosition: {x: 39.048, y: -0.982, z: 3.6937437}
+  m_LocalScale: {x: 47.623417, y: 4.652697, z: 1}
   m_Children: []
   m_Father: {fileID: 2090425885}
   m_RootOrder: 29
@@ -7403,7 +7423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1483415008
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7442,7 +7462,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -7451,6 +7471,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!1 &1484076290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484076291}
+  m_Layer: 8
+  m_Name: HeadPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1484076291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484076290}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.046, y: 0.449, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 82688060}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1493931312
 GameObject:
   m_ObjectHideFlags: 0
@@ -7548,7 +7598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1493931316
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7587,7 +7637,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -7693,7 +7743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1512722739
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7732,7 +7782,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -7838,7 +7888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1519134918
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7877,7 +7927,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -8089,7 +8139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1602935552
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8128,7 +8178,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -8234,7 +8284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1608917363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8273,7 +8323,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -8379,7 +8429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1610204210
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8418,7 +8468,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -8565,7 +8615,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650698903}
   m_Layer: 0
-  m_Name: AI
+  m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8683,7 +8733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1680470123
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8722,7 +8772,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -8828,7 +8878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1687781638
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8867,7 +8917,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -9185,7 +9235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1708779813
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9224,7 +9274,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -9372,7 +9422,7 @@ GameObject:
   - component: {fileID: 1744277975}
   - component: {fileID: 1744277974}
   - component: {fileID: 1744277973}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: HitPostProcessing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9427,7 +9477,7 @@ Transform:
   m_LocalScale: {x: 0.973236, y: 0.59287363, z: 1}
   m_Children: []
   m_Father: {fileID: 277077002}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1755809407
 GameObject:
@@ -9654,7 +9704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1771207677
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9693,7 +9743,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -9799,7 +9849,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1800176922
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9838,7 +9888,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -10050,7 +10100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1847000721
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10089,7 +10139,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -10279,7 +10329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1854694457
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10318,7 +10368,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -10523,7 +10573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &1968044786
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10562,7 +10612,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -10668,7 +10718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &2002744394
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -10707,7 +10757,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -11115,7 +11165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &2026017817
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11154,7 +11204,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -11260,7 +11310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &2027783880
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11299,7 +11349,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -11405,7 +11455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &2040070320
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11444,7 +11494,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -11550,7 +11600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &2077617832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -11589,7 +11639,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -11871,7 +11921,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9e0aa8c359a52164e9bea564a04b1a76, type: 2}
+  - {fileID: 2100000, guid: 4eb3483f6e63778499abd3eed4f59f76, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11908,7 +11958,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2096744440}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 157.50084, y: 9.342927, z: 6.840228}
+  m_LocalPosition: {x: 149.55, y: 3.45, z: 6.840228}
   m_LocalScale: {x: 70.82613, y: 39.789978, z: 39.789978}
   m_Children: []
   m_Father: {fileID: 2090425885}
@@ -12011,7 +12061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &2136521876
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12050,7 +12100,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -12156,7 +12206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  strength: 100
+  strength: 1000
 --- !u!61 &2139951338
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12195,7 +12245,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -12215,10 +12265,36 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5033904238331795815, guid: dc26ae3c6dba5c2ce80da972709da82d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7361939606262775464, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361939606262775470, guid: dc26ae3c6dba5c2ce80da972709da82d,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9776e700dbbf144a8b12ea28d8907681,
+        type: 3}
+    - target: {fileID: 7361939606262775470, guid: dc26ae3c6dba5c2ce80da972709da82d,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 20.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361939606262775470, guid: dc26ae3c6dba5c2ce80da972709da82d,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 27.324455
+      objectReference: {fileID: 0}
+    - target: {fileID: 7361939606262775470, guid: dc26ae3c6dba5c2ce80da972709da82d,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7361939606262775471, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
@@ -12233,12 +12309,12 @@ PrefabInstance:
     - target: {fileID: 7361939607323963345, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4782
+      value: 65.35
       objectReference: {fileID: 0}
     - target: {fileID: 7361939607323963345, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 23
+      value: -0.88
       objectReference: {fileID: 0}
     - target: {fileID: 7361939607323963345, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
@@ -12334,7 +12410,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthText
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 240597782}
     - target: {fileID: 7361939607323963356, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
       propertyPath: weaponDamage
@@ -12383,7 +12459,7 @@ PrefabInstance:
     - target: {fileID: 7361939607323963359, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 7361939607878388178, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
@@ -12393,7 +12469,12 @@ PrefabInstance:
     - target: {fileID: 7361939607878388179, guid: dc26ae3c6dba5c2ce80da972709da82d,
         type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7709128783953758227, guid: dc26ae3c6dba5c2ce80da972709da82d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc26ae3c6dba5c2ce80da972709da82d, type: 3}
