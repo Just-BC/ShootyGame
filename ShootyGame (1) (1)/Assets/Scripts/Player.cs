@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private float doubleJumpSpeed;
     [SerializeField] private float runSpeed;
     [SerializeField] private GameObject bullet;
     [SerializeField] private float bulletSpeed;
@@ -17,7 +18,9 @@ public class Player : MonoBehaviour
     private Vector3 startingScale;
     [SerializeField] private float maxRunSpeed;
     [SerializeField] float jumpInterval;
+    [SerializeField] float doubleJumpInterval;
     private float nextJump;
+    private float nextDoubleJump;
     public float groundCheckDist;
     public LayerMask groundLayer;
     private Vector2 startPos;
@@ -26,17 +29,17 @@ public class Player : MonoBehaviour
     [SerializeField] float weaponImpactForce;
     [SerializeField] float weaponDamage;
     [SerializeField] GameObject bulletTrail;
-    [SerializeField] float snapSpeed;
-    [SerializeField] float maxJumpSpeed;
     [SerializeField] float health;
     [SerializeField] UnityEngine.Rendering.PostProcessing.PostProcessVolume hitPostProcessing;
     [SerializeField] float hitPostLength;
     [SerializeField] float postDownSpeed;
     [SerializeField] float postUpSpeed;
     [SerializeField] UnityEngine.UI.Text healthText;
+    [SerializeField] Transform sprite;
     bool pullUp = false;
     float postEnd;
     float startHealth;
+    bool doubleJump;
     // Update is called once per frame 
     void Start()
     {
@@ -60,20 +63,31 @@ public class Player : MonoBehaviour
     }
     void Move()
     {
-        if (Input.GetAxis("Vertical") > 0 && GroundCheck() && nextJump <= Time.time)
+        if (Input.GetButtonDown("Jump") && GroundCheck() && nextJump <= Time.time)
         {
-            //rb.velocity = Vector2.zero;
+            
             nextJump = jumpInterval + Time.time;
             rb.AddForce(transform.up * jumpSpeed);
-            print("Jump!");
+            doubleJump = true;
+            nextDoubleJump = Time.time + doubleJumpInterval;
+        }
+        else if (Input.GetButtonDown("Jump") && doubleJump && !GroundCheck() && nextDoubleJump <= Time.time)
+        {
+
+            doubleJump = false;
+            rb.AddForce(transform.up * doubleJumpSpeed);
+            print(Mathf.Sign(rb.velocity.x));
         }
         if (Input.GetAxis("Horizontal") > 0)
         {
             rb.AddRelativeForce(Vector3.right * runSpeed * Time.deltaTime * 100);
+
+
         }
         if (Input.GetAxis("Horizontal") < 0)
         {
             rb.AddRelativeForce(Vector3.left * runSpeed * Time.deltaTime * 100);
+
         }
         
         if(rb.velocity.x >= maxRunSpeed)

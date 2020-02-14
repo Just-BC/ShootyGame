@@ -12,14 +12,13 @@ public class Ai : MonoBehaviour
     Rigidbody2D rb;
     [SerializeField] float speed;
     [SerializeField] float stopDist;
-    Transform goal;
+    [SerializeField] Transform goal;
     public List<Transform> visibleTargets = new List<Transform>();
     [SerializeField] List<Transform> Waypoints;
     [SerializeField] float wayPointTime;
+    [SerializeField] float wayPointStopDist;
     public float viewDist;
     public float viewAngle;
-    float maxAngle;
-    float minAngle;
     [SerializeField] LayerMask obstacleMask;
     [SerializeField] AnimationCurve curve;
 
@@ -34,7 +33,7 @@ public class Ai : MonoBehaviour
     [Header("Misc")]
     [SerializeField] float health;
     [Header("Weapon")]
-    [SerializeField] [Range(0, 10)] float aimAccuracy;
+    [SerializeField] [Range(0.0001f, 1)] float aimAccuracy;
     [SerializeField] float fireRate;
     [SerializeField] GameObject bulletTrail;
     [SerializeField] float fireDist;
@@ -48,6 +47,7 @@ public class Ai : MonoBehaviour
     Vector3 startScale;
     float nextFire;
     float distToGoal;
+    [SerializeField] bool wayPointTimerOn;
 
     void Start()
     {
@@ -55,8 +55,6 @@ public class Ai : MonoBehaviour
         startSpeed = speed;//record the starting speed;
         rb = GetComponent<Rigidbody2D>();//find the rigid body
         startScale = transform.localScale; //record the starting scale
-        maxAngle = viewAngle;
-        maxAngle = -viewAngle;
         //Clear all waypoint parents
         foreach (Transform g in Waypoints)
         {
@@ -77,8 +75,9 @@ public class Ai : MonoBehaviour
             mode = "fight";
             Fight();
         }
-        else if (mode == "patrol")
+        else
         {
+            mode = "patrol";
             Patrol();
         }
 
@@ -87,8 +86,11 @@ public class Ai : MonoBehaviour
     ///NAVIGATION//////////////////////////////////////
     IEnumerator WayPointTimer()
     {
+
+        wayPointTimerOn = true;
         yield return new WaitForSeconds(wayPointTime);
         FindWaypoint();
+        wayPointTimerOn = false;
     }
     Vector2 GetPlayerLoc()
     {
@@ -97,12 +99,15 @@ public class Ai : MonoBehaviour
     }
     void Patrol()
     {
-        speed = patrolSpeed;
-        if(goal==null)
-            FindWaypoint();
+        speed = patrolSpeed;//set the speed to patrol speed
+
+        if(goal==null | goal == player.transform)
+            FindWaypoint();//set the goal to a new waypoint
+
         distToGoal = Vector2.Distance(transform.position, goal.transform.position);
-        
-        if(goal != null)
+        if (distToGoal <= wayPointStopDist && !wayPointTimerOn)
+            StartCoroutine(WayPointTimer());
+        if (goal != null)
         {
             if (transform.position.x < goal.transform.position.x)
             {
@@ -122,31 +127,33 @@ public class Ai : MonoBehaviour
             {
                 rb.AddRelativeForce(transform.right * speed * curve.Evaluate(1 - distToGoal) * Time.deltaTime * 100);
             }//move right
-        }
-        print(goal.name);
+        }//move towards the goal
+        //print(goal.name);
     }
     bool FindTargets()
     {
         headPos.LookAt(player.transform.position);
-        if (!Physics2D.Raycast(headPos.position, headPos.forward, Vector2.Distance(headPos.position, player.transform.position), playerMask))// && headPos.eulerAngles.z >= maxAngle && headPos.eulerAngles.z <= minAngle)
+        bool withinViewingRange = headPos.eulerAngles.x < viewAngle && headPos.eulerAngles.x > -viewAngle;
+        if (Physics2D.Raycast(headPos.position, headPos.forward, Vector2.Distance(headPos.position, player.transform.position), playerMask)==false && withinViewingRange)
         {
             goal = player.transform;
             return true;
         }
         else
         {
+            if(goal == player.transform)
+                goal = null;
             return false;
         }
     }
     void FindWaypoint()
     {
+
         if (Waypoints.Count == currentGoal)
         {
             currentGoal = 0;
-            
         }
         goal = Waypoints[currentGoal];
-        StartCoroutine(WayPointTimer());
         currentGoal++;
 
     }
@@ -158,7 +165,6 @@ public class Ai : MonoBehaviour
         speed = startSpeed;
         Fire();
         Aim();
-        goal = player.transform;
         distToGoal = Vector2.Distance(transform.position, goal.transform.position);
         if (transform.position.x < goal.transform.position.x)
         {
@@ -179,7 +185,9 @@ public class Ai : MonoBehaviour
     }
     void Aim()
     {
-        bulletSpawn.eulerAngles = new Vector3(0, 0, (Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x-transform.position.x) *180/(Mathf.PI)));
+        float angle = (Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x) * 180 / (Mathf.PI));
+        angle += +Random.Range(-1, 1) * (1 / aimAccuracy);
+        bulletSpawn.eulerAngles = new Vector3(0, 0, angle);
 
     }
     void Fire()
