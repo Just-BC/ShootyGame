@@ -32,6 +32,7 @@ public class Ai : MonoBehaviour
 
     [Header("Misc")]
     [SerializeField] float health;
+    [SerializeField] GameObject medKit;
     [Header("Weapon")]
     [SerializeField] [Range(0.0001f, 1)] float aimAccuracy;
     [SerializeField] float fireRate;
@@ -238,7 +239,12 @@ public class Ai : MonoBehaviour
         health -= damage;
         if(health <= 0)
         {
-            Destroy(gameObject);
+            Death();
         }
+    }
+    void Death()
+    {
+        Instantiate(medKit, transform.position, transform.rotation, null);
+        Destroy(gameObject);
     }
 }

@@ -122,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 831273421}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.544, y: -0.553, z: 0}
+  m_LocalPosition: {x: -5.88, y: -0.553, z: 0}
   m_LocalScale: {x: 2.0613, y: 1.2014, z: 1}
   m_Children: []
   m_Father: {fileID: 8000248285516444625}
@@ -218,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1116358103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.93, y: -0.536, z: 0}
+  m_LocalPosition: {x: 5.46, y: -0.536, z: 0}
   m_LocalScale: {x: 2.0613, y: 1.2014, z: 1}
   m_Children: []
   m_Father: {fileID: 8000248285516444625}
@@ -288,6 +288,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activationDist: 0
   checkTime: 4
+--- !u!1 &1484076290
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484076291}
+  m_Layer: 0
+  m_Name: HeadPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1484076291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484076290}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.046, y: 0.449, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8000248285516444625}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1494881661
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +457,7 @@ GameObject:
   - component: {fileID: 8000248285516444638}
   - component: {fileID: 660985145600171010}
   - component: {fileID: 8000248285516444624}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Bob R. AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +473,7 @@ Transform:
   m_GameObject: {fileID: 8000248285516444639}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.36, y: -0.68, z: 0}
-  m_LocalScale: {x: 1, y: 1.6867, z: 1}
+  m_LocalScale: {x: 1.2559, y: 2.1183267, z: 1.2559}
   m_Children:
   - {fileID: 8000248284964099538}
   - {fileID: 8000248286577762991}
@@ -451,6 +481,7 @@ Transform:
   - {fileID: 1116358104}
   - {fileID: 1494881662}
   - {fileID: 265208750}
+  - {fileID: 1484076291}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -488,7 +519,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.08174442}
+  m_Offset: {x: 0, y: 0.04107637}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -499,7 +530,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.87727654, y: 0.3908395}
+  m_Size: {x: 0.87727654, y: 0.3095035}
   m_EdgeRadius: 0
 --- !u!58 &660985145600171010
 CircleCollider2D:
@@ -530,14 +561,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 3.2
-  stopDist: 3
+  speed: 4
+  stopDist: 5
+  goal: {fileID: 0}
+  visibleTargets: []
   Waypoints:
   - {fileID: 831273422}
   - {fileID: 1116358104}
   wayPointTime: 5
-  viewDist: 50
-  viewAngle: 25
+  wayPointStopDist: 0.9
+  viewDist: 2.6
+  viewAngle: 45
   obstacleMask:
     serializedVersion: 2
     m_Bits: 18
@@ -547,35 +581,41 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1.0007222
-      inSlope: -2
-      outSlope: -2
+      inSlope: -0.7440337
+      outSlope: -0.7440337
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.14142062
     - serializedVersion: 3
-      time: 0.3671015
-      value: 0.5974291
-      inSlope: 1.0508947
-      outSlope: 1.0508947
+      time: 0.50361633
+      value: 0.8660483
+      inSlope: 0.22048643
+      outSlope: 0.22048643
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.23940422
+      inWeight: 0.25378114
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   mode: patrol
   patrolSpeed: 3.2
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  headPos: {fileID: 1484076291}
   health: 5
-  aimAccuracy: 0
-  fireRate: 1
+  medKit: {fileID: 4831757345523586390, guid: 2d35b59097935c24da1095bb43e5341a, type: 3}
+  aimAccuracy: 0.0001
+  fireRate: 0.25
   bulletTrail: {fileID: 7501294854277888386, guid: 1e98fe113fb5594bca146ba378081006,
     type: 3}
   fireDist: 20
   weaponImpactForce: 150
   weaponDamage: 1
   bulletSpawn: {fileID: 8000248284964099538}
+  wayPointTimerOn: 0
 --- !u!1 &8000248286577762984
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +626,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8000248286577762991}
   - component: {fileID: 8000248286577762990}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: dude
   m_TagString: Untagged
   m_Icon: {fileID: 0}

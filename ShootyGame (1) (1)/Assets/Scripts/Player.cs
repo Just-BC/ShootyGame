@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     [SerializeField] float hitPostLength;
     [SerializeField] float postDownSpeed;
     [SerializeField] float postUpSpeed;
-    [SerializeField] UnityEngine.UI.Text healthText;
+    [SerializeField] UnityEngine.UI.Slider healthSlider;
     [SerializeField] Transform sprite;
     bool pullUp = false;
     float postEnd;
@@ -54,8 +54,9 @@ public class Player : MonoBehaviour
         Aim();
         GroundCheck();
         Fire();
-        hitPostProcess(false);
+        HitPostProcess(false);
         UI();
+        
     }
     private void FixedUpdate()
     {
@@ -101,7 +102,7 @@ public class Player : MonoBehaviour
     }
     private void UI()
     {
-        healthText.text = "Health :" + health.ToString();
+        healthSlider.value =  health/startHealth;
     }
     void Fire()
     {
@@ -210,10 +211,14 @@ public class Player : MonoBehaviour
         {
             Respawn();
         }
-        hitPostProcess(true);
+        HitPostProcess(true);
         
     }
-    void hitPostProcess(bool up)
+    public void HealthUp(int healthUp)
+    {
+        health += healthUp;
+    }
+    void HitPostProcess(bool up)
     {
         if (up)
         {
@@ -237,4 +242,5 @@ public class Player : MonoBehaviour
         }
          
     }
+    
 }
