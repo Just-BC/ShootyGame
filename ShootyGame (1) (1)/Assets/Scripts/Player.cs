@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float maxRunSpeed;
     [SerializeField] float jumpInterval;
     [SerializeField] float doubleJumpInterval;
+    [SerializeField] float crouchAmount;
     private float nextJump;
     private float nextDoubleJump;
     public float groundCheckDist;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
     [SerializeField] float postUpSpeed;
     [SerializeField] UnityEngine.UI.Slider healthSlider;
     [SerializeField] Transform sprite;
+    [SerializeField] Vector2 spriteStartingScale;
     bool pullUp = false;
     float postEnd;
     float startHealth;
@@ -47,6 +49,7 @@ public class Player : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         startingScale = transform.localScale;
         startPos = transform.position;
+        spriteStartingScale = sprite.transform.localScale;
         //bulletSpawnPosStart = bulletSpawn.transform;
     }
     void Update()
@@ -98,6 +101,17 @@ public class Player : MonoBehaviour
         if (rb.velocity.x <= -maxRunSpeed)
         {
             rb.velocity = new Vector2(-maxRunSpeed, rb.velocity.y);
+        }
+        if (Input.GetButton("Crouch"))
+        {
+            transform.localScale = new Vector2(transform.localScale.x, startingScale.y / crouchAmount);
+            sprite.transform.localScale = new Vector2(sprite.localScale.x, spriteStartingScale.y / crouchAmount);
+            print("crouch");
+        }
+        else
+        {
+            transform.localScale = new Vector2(transform.localScale.x, startingScale.y);
+            sprite.transform.localScale = new Vector2(sprite.localScale.x, spriteStartingScale.y);
         }
     }
     private void UI()
