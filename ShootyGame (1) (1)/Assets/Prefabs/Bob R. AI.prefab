@@ -471,7 +471,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8000248285516444639}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.36, y: -0.68, z: 0}
   m_LocalScale: {x: 1.2559, y: 2.1183267, z: 1.2559}
   m_Children:
@@ -569,7 +569,7 @@ MonoBehaviour:
   - {fileID: 831273422}
   - {fileID: 1116358104}
   wayPointTime: 5
-  wayPointStopDist: 0.9
+  wayPointStopDist: 0.5
   viewDist: 2.6
   viewAngle: 45
   obstacleMask:
@@ -580,21 +580,21 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1.0007222
-      inSlope: -0.7440337
-      outSlope: -0.7440337
+      value: 0.40740967
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.14142062
+      outWeight: 0
     - serializedVersion: 3
-      time: 0.50361633
-      value: 0.8660483
-      inSlope: 0.22048643
-      outSlope: 0.22048643
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.25378114
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -615,6 +615,7 @@ MonoBehaviour:
   weaponImpactForce: 150
   weaponDamage: 1
   bulletSpawn: {fileID: 8000248284964099538}
+  distToGoal: 0
   wayPointTimerOn: 0
 --- !u!1 &8000248286577762984
 GameObject:

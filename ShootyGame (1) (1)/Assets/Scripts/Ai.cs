@@ -47,7 +47,7 @@ public class Ai : MonoBehaviour
     float startSpeed;
     Vector3 startScale;
     float nextFire;
-    float distToGoal;
+    [SerializeField] float distToGoal;
     [SerializeField] bool wayPointTimerOn;
 
     void Start()
@@ -121,13 +121,14 @@ public class Ai : MonoBehaviour
 
             if (transform.position.x > goal.transform.position.x - stopDist/10)
             {
-                rb.AddRelativeForce(-transform.right * speed * curve.Evaluate(1 - distToGoal) * Time.deltaTime * 100);
+                rb.AddRelativeForce(-transform.right * speed * curve.Evaluate(distToGoal) * Time.deltaTime * 100);
             }//move left
 
             if (transform.position.x < goal.transform.position.x + stopDist/10)
             {
-                rb.AddRelativeForce(transform.right * speed * curve.Evaluate(1 - distToGoal) * Time.deltaTime * 100);
-            }//move right
+                rb.AddRelativeForce(transform.right * speed * curve.Evaluate(distToGoal) * Time.deltaTime * 100);
+            }
+            //print(distToGoal);//move right
         }//move towards the goal
         //print(goal.name);
     }

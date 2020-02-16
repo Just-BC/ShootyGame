@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
                 {
                     hit.collider.GetComponent<Ai>().Damage(weaponDamage);
                 }
-                print("fired and hit somethin");
+                //print("fired and hit somethin");
             }
             else
             {
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
                 trail.GetComponent<LineRenderer>().material.mainTextureScale =new Vector2( Vector2.Distance(bulletSpawn.transform.position, bulletSpawn.right * fireDist),1);
                 trail.GetComponent<Animator>().SetFloat(0, 1 / fireDist);
                 //Debug.DrawLine(bulletSpawn.position, bulletSpawn.right.normalized * fireDist, Color.blue,20,false);
-                print("fired but didn't hit nothin");
+                //print("fired but didn't hit nothin");
             }
              
         }
@@ -231,6 +231,10 @@ public class Player : MonoBehaviour
     public void HealthUp(int healthUp)
     {
         health += healthUp;
+        if (health > startHealth)
+        {
+            health = startHealth;
+        }
     }
     void HitPostProcess(bool up)
     {
@@ -238,7 +242,7 @@ public class Player : MonoBehaviour
         {
             postEnd += hitPostLength*(startHealth/health)+Time.time;
             pullUp = true;
-            print("Will be fading for:0" + (postEnd - Time.time));
+            //print("Will be fading for:0" + (postEnd - Time.time));
         }
         if(pullUp && postEnd >= Time.time && hitPostProcessing.weight < 1-(health / startHealth))
         {
