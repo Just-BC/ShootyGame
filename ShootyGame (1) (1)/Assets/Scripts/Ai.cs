@@ -46,12 +46,14 @@ public class Ai : MonoBehaviour
     float startHealth;
     float startSpeed;
     Vector3 startScale;
+    public int dir;
     float nextFire;
     [SerializeField] float distToGoal;
     [SerializeField] bool wayPointTimerOn;
 
     void Start()
     {
+        transform.parent = null;
         startHealth = health;//record the starting health
         startSpeed = speed;//record the starting speed;
         rb = GetComponent<Rigidbody2D>();//find the rigid body
@@ -70,7 +72,7 @@ public class Ai : MonoBehaviour
     ///MODES/BEHAVIOR//////////////////////////////////////
     void Logic()
     {
-
+        dir = (int) Mathf.Sign(startScale.x / transform.localScale.x);
         if (FindTargets())
         {
             mode = "fight";
@@ -101,13 +103,19 @@ public class Ai : MonoBehaviour
     void Patrol()
     {
         speed = patrolSpeed;//set the speed to patrol speed
-
-        if(goal==null | goal == player.transform)
+        
+        if (goal==null | goal == player.transform)
+        {
             FindWaypoint();//set the goal to a new waypoint
+            
+        }
+        distToGoal = Mathf.Abs(goal.transform.position.x - transform.position.x);
 
-        distToGoal = Vector2.Distance(transform.position, goal.transform.position);
+
         if (distToGoal <= wayPointStopDist && !wayPointTimerOn)
             StartCoroutine(WayPointTimer());
+
+
         if (goal != null)
         {
             if (transform.position.x < goal.transform.position.x)
@@ -119,34 +127,37 @@ public class Ai : MonoBehaviour
                 transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z);
             }//flip sprite left to look the goal
 
-            if (transform.position.x > goal.transform.position.x - stopDist/10)
+            if (transform.position.x < (goal.transform.position.x + wayPointStopDist))
             {
-                rb.AddRelativeForce(-transform.right * speed * curve.Evaluate(distToGoal) * Time.deltaTime * 100);
+                rb.AddRelativeForce(transform.right * speed * Time.deltaTime * 100);
+            }
+            if (transform.position.x > (goal.transform.position.x - wayPointStopDist))
+            {
+                rb.AddRelativeForce(-transform.right * speed *  Time.deltaTime * 100);
             }//move left
 
-            if (transform.position.x < goal.transform.position.x + stopDist/10)
-            {
-                rb.AddRelativeForce(transform.right * speed * curve.Evaluate(distToGoal) * Time.deltaTime * 100);
-            }
+            
             //print(distToGoal);//move right
         }//move towards the goal
         //print(goal.name);
     }
     bool FindTargets()
     {
-        headPos.LookAt(player.transform.position);
-        bool withinViewingRange = headPos.eulerAngles.x < viewAngle && headPos.eulerAngles.x > -viewAngle;
-        if (Physics2D.Raycast(headPos.position, headPos.forward, Vector2.Distance(headPos.position, player.transform.position), playerMask)==false && withinViewingRange)
+        headPos.eulerAngles = new Vector3(0, 0,(Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x) * 180 / (Mathf.PI)));
+        bool isInView = (headPos.eulerAngles.z -180 < viewAngle && headPos.eulerAngles.z -180 > -viewAngle && dir <0) | (headPos.eulerAngles.z - 360 < viewAngle && headPos.eulerAngles.z - 360 > -viewAngle && dir > 0);
+        if (Physics2D.Raycast(headPos.position, headPos.right, Vector2.Distance(headPos.position, player.transform.position), playerMask)==false && isInView)
         {
             goal = player.transform;
             return true;
         }
+        
         else
         {
             if(goal == player.transform)
                 goal = null;
             return false;
         }
+        
     }
     void FindWaypoint()
     {
@@ -188,7 +199,7 @@ public class Ai : MonoBehaviour
     void Aim()
     {
         float angle = (Mathf.Atan2(player.transform.position.y - transform.position.y, player.transform.position.x - transform.position.x) * 180 / (Mathf.PI));
-        angle += +Random.Range(-1, 1) * (1 / aimAccuracy);
+        //angle += +Random.Range(-1, 1) * (1 / aimAccuracy);
         bulletSpawn.eulerAngles = new Vector3(0, 0, angle);
 
     }
@@ -232,7 +243,6 @@ public class Ai : MonoBehaviour
             
         }
     }
-
 
     ///MISC////////////////////////////////////////////
     public void Damage(float damage)

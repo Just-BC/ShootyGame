@@ -59,7 +59,8 @@ public class Player : MonoBehaviour
         Fire();
         HitPostProcess(false);
         UI();
-        
+        Jump();
+
     }
     private void FixedUpdate()
     {
@@ -67,21 +68,7 @@ public class Player : MonoBehaviour
     }
     void Move()
     {
-        if (Input.GetButtonDown("Jump") && GroundCheck() && nextJump <= Time.time)
-        {
-            
-            nextJump = jumpInterval + Time.time;
-            rb.AddForce(transform.up * jumpSpeed);
-            doubleJump = true;
-            nextDoubleJump = Time.time + doubleJumpInterval;
-        }
-        else if (Input.GetButtonDown("Jump") && doubleJump && !GroundCheck() && nextDoubleJump <= Time.time)
-        {
-
-            doubleJump = false;
-            rb.AddForce(transform.up * doubleJumpSpeed);
-            print(Mathf.Sign(rb.velocity.x));
-        }
+        
         if (Input.GetAxis("Horizontal") > 0)
         {
             rb.AddRelativeForce(Vector3.right * runSpeed * Time.deltaTime * 100);
@@ -112,6 +99,25 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector2(transform.localScale.x, startingScale.y);
             sprite.transform.localScale = new Vector2(sprite.localScale.x, spriteStartingScale.y);
+        }
+        
+    }
+    void Jump()
+    {
+        if (Input.GetButtonDown("Jump") && GroundCheck() && nextJump <= Time.time)
+        {
+
+            nextJump = jumpInterval + Time.time;
+            rb.AddForce(transform.up * jumpSpeed);
+            doubleJump = true;
+            nextDoubleJump = Time.time + doubleJumpInterval;
+        }
+        else if (Input.GetButtonDown("Jump") && doubleJump && !GroundCheck() && nextDoubleJump <= Time.time)
+        {
+
+            doubleJump = false;
+            rb.AddForce(transform.up * doubleJumpSpeed);
+            print(Mathf.Sign(rb.velocity.x));
         }
     }
     private void UI()
@@ -188,7 +194,6 @@ public class Player : MonoBehaviour
         if (collision.transform.name == "DeathCube")
             Respawn();
     }
-
     void Respawn()
     {
         print("die");
