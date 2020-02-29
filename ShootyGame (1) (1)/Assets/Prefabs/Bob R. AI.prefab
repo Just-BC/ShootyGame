@@ -564,6 +564,7 @@ MonoBehaviour:
   speed: 4
   stopDist: 5
   goal: {fileID: 0}
+  lastGoal: {fileID: 0}
   visibleTargets: []
   Waypoints:
   - {fileID: 831273422}
@@ -601,6 +602,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   mode: patrol
   patrolSpeed: 3.2
+  inspectSpeed: 2.8
   playerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -616,8 +618,11 @@ MonoBehaviour:
   weaponDamage: 1
   bulletSpawn: {fileID: 8000248284964099538}
   dir: 0
+  inspectTime: 0
+  inspectPointTime: 0
   distToGoal: 0
   wayPointTimerOn: 0
+  wayPointTransform: {fileID: 0}
 --- !u!1 &8000248286577762984
 GameObject:
   m_ObjectHideFlags: 0

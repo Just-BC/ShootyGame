@@ -13,6 +13,7 @@ public class Ai : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float stopDist;
     [SerializeField] Transform goal;
+    [SerializeField] Transform lastGoal;
     public List<Transform> visibleTargets = new List<Transform>();
     [SerializeField] List<Transform> Waypoints;
     [SerializeField] float wayPointTime;
@@ -25,14 +26,17 @@ public class Ai : MonoBehaviour
     [Header("Modes/Behavior")]
     [SerializeField] string mode;
     [SerializeField] float patrolSpeed;
+    [SerializeField] float inspectSpeed;
     [SerializeField] LayerMask playerMask;
     [SerializeField] Transform headPos;
+    [SerializeField] Transform questionMark;
 
 
 
     [Header("Misc")]
     [SerializeField] float health;
     [SerializeField] GameObject medKit;
+
     [Header("Weapon")]
     [SerializeField] [Range(0.0001f, 1)] float aimAccuracy;
     [SerializeField] float fireRate;
@@ -48,8 +52,14 @@ public class Ai : MonoBehaviour
     Vector3 startScale;
     public int dir;
     float nextFire;
+    bool inspect;
+    float lastCheck = 0;
+    [SerializeField] float inspectTime;
+    [SerializeField] float inspectPointTime;
     [SerializeField] float distToGoal;
     [SerializeField] bool wayPointTimerOn;
+    [SerializeField] Transform wayPointTransform;
+    [SerializeField] Vector2 lastPlayerPos;
 
     void Start()
     {
@@ -58,6 +68,7 @@ public class Ai : MonoBehaviour
         startSpeed = speed;//record the starting speed;
         rb = GetComponent<Rigidbody2D>();//find the rigid body
         startScale = transform.localScale; //record the starting scale
+        wayPointTransform.parent = null;
         //Clear all waypoint parents
         foreach (Transform g in Waypoints)
         {
@@ -73,32 +84,63 @@ public class Ai : MonoBehaviour
     void Logic()
     {
         dir = (int) Mathf.Sign(startScale.x / transform.localScale.x);
-        if (FindTargets())
+        if (inspect)
+        {
+            Inspect();
+            mode = "inspect";
+            questionMark.gameObject.SetActive(true);
+        }
+        else if (FindTargets())
         {
             mode = "fight";
             Fight();
+            questionMark.gameObject.SetActive(false);
         }
+        
         else
         {
             mode = "patrol";
             Patrol();
+            questionMark.gameObject.SetActive(false);
         }
 
     }
-
     ///NAVIGATION//////////////////////////////////////
     IEnumerator WayPointTimer()
     {
 
         wayPointTimerOn = true;
+        
         yield return new WaitForSeconds(wayPointTime);
         FindWaypoint();
         wayPointTimerOn = false;
     }
-    Vector2 GetPlayerLoc()
+    IEnumerator InspectTimer()
     {
-        //Instantiate(testObj, player.transform.position, player.transform.rotation);
-        return player.transform.position;
+        print("started to inspect!");
+        inspect = true;
+        yield return new WaitForSeconds(inspectTime);
+        inspect = false;
+        lastGoal = null;
+    }
+    void Inspect()
+    {
+        //this function will randomly pick goals to move to in a range near the players last position
+        if (lastCheck < Time.time)
+        {
+            goal = wayPointTransform;
+            Vector3 newWayPointPos;
+            float r = Random.Range(0.5f, 5f);
+            if (Random.Range(-1f, 1f) <= 0)//flip direction of goal offset randomly
+            {
+                r = -1;
+            }
+            newWayPointPos = new Vector3 (lastPlayerPos.x + r,0,0);
+            
+            wayPointTransform.position = newWayPointPos;
+            lastCheck = Time.time + inspectPointTime;
+        }
+        Move(goal, inspectSpeed);
     }
     void Patrol()
     {
@@ -110,36 +152,11 @@ public class Ai : MonoBehaviour
             
         }
         distToGoal = Mathf.Abs(goal.transform.position.x - transform.position.x);
-
-
         if (distToGoal <= wayPointStopDist && !wayPointTimerOn)
             StartCoroutine(WayPointTimer());
+        Move(goal, patrolSpeed);
 
-
-        if (goal != null)
-        {
-            if (transform.position.x < goal.transform.position.x)
-            {
-                transform.localScale = new Vector3(startScale.x, transform.localScale.y, transform.localScale.z);
-            }//flip sprite right to look at the goal
-            else
-            {
-                transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z);
-            }//flip sprite left to look the goal
-
-            if (transform.position.x < (goal.transform.position.x + wayPointStopDist))
-            {
-                rb.AddRelativeForce(transform.right * speed * Time.deltaTime * 100);
-            }
-            if (transform.position.x > (goal.transform.position.x - wayPointStopDist))
-            {
-                rb.AddRelativeForce(-transform.right * speed *  Time.deltaTime * 100);
-            }//move left
-
-            
-            //print(distToGoal);//move right
-        }//move towards the goal
-        //print(goal.name);
+        
     }
     bool FindTargets()
     {
@@ -148,13 +165,20 @@ public class Ai : MonoBehaviour
         if (Physics2D.Raycast(headPos.position, headPos.right, Vector2.Distance(headPos.position, player.transform.position), playerMask)==false && isInView)
         {
             goal = player.transform;
+            lastGoal = player.transform;
+            lastPlayerPos = player.transform.position;
             return true;
         }
-        
+        else if (lastGoal == player.transform && !inspect)
+        {
+            StartCoroutine(InspectTimer());
+            return false;
+        }
         else
         {
             if(goal == player.transform)
                 goal = null;
+                lastGoal = null;
             return false;
         }
         
@@ -170,6 +194,25 @@ public class Ai : MonoBehaviour
         currentGoal++;
 
     }
+    private void Move(Transform g, float s)
+    {
+        if (transform.position.x < g.transform.position.x)
+        {
+            transform.localScale = new Vector3(startScale.x, transform.localScale.y, transform.localScale.z);
+        }//flip sprite right to look at the goal
+        else
+        {
+            transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z);
+        }//flip sprite left to look the goal
+        if (transform.position.x < (g.transform.position.x + wayPointStopDist))
+        {
+            rb.AddRelativeForce(transform.right * s * Time.deltaTime * 100);
+        }//move right
+        if (transform.position.x > (g.transform.position.x - wayPointStopDist))
+        {
+            rb.AddRelativeForce(-transform.right * s * Time.deltaTime * 100);
+        }//move left
+    }
 
 
     ///WEAPON//////////////////////////////////////////
@@ -179,22 +222,8 @@ public class Ai : MonoBehaviour
         Fire();
         Aim();
         distToGoal = Vector2.Distance(transform.position, goal.transform.position);
-        if (transform.position.x < goal.transform.position.x)
-        {
-            transform.localScale = new Vector3(startScale.x, transform.localScale.y, transform.localScale.z);//flip sprite to look at the goal
-        }
-        else
-        {
-            transform.localScale = new Vector3(-startScale.x, transform.localScale.y, transform.localScale.z); //flip sprite to look the goal
-        }
-        if (transform.position.x > goal.transform.position.x - stopDist)
-        {
-            rb.AddRelativeForce(-transform.right * speed * Time.deltaTime * 100);//move left
-        }
-        if (transform.position.x < goal.transform.position.x + stopDist)
-        {
-            rb.AddRelativeForce(transform.right * speed * Time.deltaTime * 100); //move right
-        }
+        Move(goal, speed);
+        
     }
     void Aim()
     {
@@ -245,6 +274,7 @@ public class Ai : MonoBehaviour
     }
 
     ///MISC////////////////////////////////////////////
+
     public void Damage(float damage)
     {
         health -= damage;
@@ -258,4 +288,5 @@ public class Ai : MonoBehaviour
         Instantiate(medKit, transform.position, transform.rotation, null);
         Destroy(gameObject);
     }
+    
 }
